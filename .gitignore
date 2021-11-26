@@ -1,0 +1,4 @@
+.idea
+data/3D_dapi/*.tif
+data/out/boundaries/*.jpg
+*.npz
