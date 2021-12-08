@@ -4,6 +4,7 @@ import pandas as pd
 import diplib as dip
 import skimage.io
 from PIL import Image, ImageDraw
+import utils
 import os
 import logging
 
@@ -81,14 +82,14 @@ def convert_to_rgb(page):
     return img
 
 
-def draw_poly(polys, jpg_filename):
+def draw_poly(polys, colours, jpg_filename):
     img = Image.open(jpg_filename).convert('RGB')
 
     img2 = img.copy()
     draw = ImageDraw.Draw(img2)
-    for poly in polys:
+    for i, poly in enumerate(polys):
         poly = [tuple(d) for d in poly]
-        draw.line(poly, fill="#ffff00", width=1)
+        draw.line(poly, fill=colours[i], width=1)
         # img3 = Image.blend(img, img2, 0.4)
     return img2
 
@@ -98,22 +99,22 @@ def draw_boundaries(img, masks):
         offset_x = 0
         offset_y = 0
         boundaries = extract_borders_dip(mask.astype(np.uint32), offset_x, offset_y, [0])
-
+        boundaries['colour'] = utils.get_colour(boundaries.label.values)
         polys = boundaries.coords.values
         jpg_filename = get_jpg(i)
         if len(polys) > 0:
-            res = draw_poly(polys, jpg_filename)
+            res = draw_poly(polys, boundaries['colour'].values, jpg_filename)
             jpg_page = os.path.join(BOUNDARIES_JPG_DIR, os.path.basename(jpg_filename))
             res.save(jpg_page)
             logger.info('Boundaries saved at %s' % jpg_page)
-
 
 def segment(img):
     app = NuclearSegmentation()
     print('Training Resolution:', app.model_mpp, 'microns per pixel')
     y_pred = app.predict(img, image_mpp=1.0, batch_size=2)
     masks_zxy = y_pred[:, :, :, 0]
-    np.savez('deepcell_masks_rescaled.npz', masks_zxy)
+    masks_stitched = utils.stitch3D(masks_zxy, stitch_threshold=0.5)
+    np.savez('deepcell_masks_stitched.npz', masks_stitched)
     logger.info('Masks saved to disk!')
     return masks_zxy
 
