@@ -1,5 +1,5 @@
 
-<img src="anti ATPase 10x secondary.JPG" width="200"/> <img src="anti cadherin.JPG" width="300"/>
+<img src="anti ATPase 10x secondary.JPG" width="200"/> <img src="anti cadherin.JPG" width="200"/>
 
 
 <table>
