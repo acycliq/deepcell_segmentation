@@ -1,3 +1,7 @@
+
+<img src="anti ATPase 10x secondary.JPG" width="200"/> <img src="anti cadherin.JPG" width="300"/>
+
+
 <table>
 <tr>
 <td></td>
@@ -23,3 +27,4 @@
     <td>YES</td>
   </tr>
 </table>
+
