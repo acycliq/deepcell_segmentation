@@ -2,7 +2,7 @@
 <tr>
 <td></td>
 <td>Nuclei</td>
-<td colspan="3">Cytoplasm</td>
+<td colspan="2" style="text-align:center;">Cytoplasm</td>
 </tr>
   <tr>
     <td></td>
