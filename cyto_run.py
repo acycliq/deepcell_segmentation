@@ -16,8 +16,8 @@ logging.basicConfig(
 
 # ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 ROOT_DIR = r"D:\Home\Dimitris\OneDrive - University College London\Data\Izzie\210514 ATPase + Cadherin antibody test - 1-100 -secondary\downscaled"
-FRAMES_JPG_DIR = os.path.join(ROOT_DIR, 'anti cadherin', 'frames', 'jpg')
-BOUNDARIES_JPG_DIR = os.path.join(ROOT_DIR, 'anti cadherin', 'out', 'boundaries')
+FRAMES_JPG_DIR = os.path.join(ROOT_DIR, 'anti ATPase 10x secondary', 'frames', 'jpg')
+BOUNDARIES_JPG_DIR = os.path.join(ROOT_DIR, 'anti ATPase 10x secondary', 'out', 'boundaries')
 
 
 def extract_borders_dip(label_image, offset_x=0, offset_y=0, ignore_labels=[0]):
@@ -60,11 +60,11 @@ def get_jpg(i):
     retrieves the jpg to draw the boundaries on
     """
     # 1. first check if there is already a jpg
-    jpg_page = os.path.join(BOUNDARIES_JPG_DIR, 'anti cadherin_z%s_c001.jpg' % str(i).zfill(3))
+    jpg_page = os.path.join(BOUNDARIES_JPG_DIR, 'anti ATPase 10x secondary_z%s_c001.jpg' % str(i).zfill(3))
     if os.path.isfile(jpg_page):
         return jpg_page
     else:
-        return os.path.join(FRAMES_JPG_DIR, 'anti cadherin_z%s_c001.jpg' % str(i).zfill(3))
+        return os.path.join(FRAMES_JPG_DIR, 'anti ATPase 10x secondary_z%s_c001.jpg' % str(i).zfill(3))
 
 
 def normalize_q(img, q=99):
@@ -130,6 +130,6 @@ def main(img_path):
 
 
 if __name__ == "__main__":
-    img_path = os.path.join(ROOT_DIR, 'anti cadherin', 'anti cadherin.tif')
+    img_path = os.path.join(ROOT_DIR, 'anti ATPase 10x secondary', 'anti ATPase 10x secondary.tif')
     main(img_path)
     logger.info('Done')
